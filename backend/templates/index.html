@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="hero-section text-center mb-5 p-5 rounded shadow" style="background: linear-gradient(135deg, #198754, #0dcaf0); color: white;">
+    <h1 class="fw-bold">Smart Waste Management</h1>
+    <p class="lead">Upload an image and let AI classify your waste responsibly 🌍</p>
+  </div>
+
+  <div class="card shadow-lg p-4 upload-card">
+    <h2 class="text-success mb-4 text-center">Upload Waste Image for Prediction</h2>
+    <form action="{{ url_for('predict') }}" method="POST" enctype="multipart/form-data">
+      <div class="mb-3 text-center">
+        <label class="form-label fw-bold">Select an image</label>
+        <input type="file" name="file" class="form-control w-75 mx-auto" required>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-lg btn-success px-5">Predict 🚀</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="row text-center icons-row mt-5">
+    <div class="col-md-3">
+      <img src="{{ url_for('static', filename='icons/organic.png') }}" class="img-fluid mb-2" style="height:80px;">
+      <h6>Organic</h6>
+    </div>
+    <div class="col-md-3">
+      <img src="{{ url_for('static', filename='icons/plastic.png') }}" class="img-fluid mb-2" style="height:80px;">
+      <h6>Plastic</h6>
+    </div>
+    <div class="col-md-3">
+      <img src="{{ url_for('static', filename='icons/metal.png') }}" class="img-fluid mb-2" style="height:80px;">
+      <h6>Metal</h6>
+    </div>
+    <div class="col-md-3">
+      <img src="{{ url_for('static', filename='icons/ewaste.png') }}" class="img-fluid mb-2" style="height:80px;">
+      <h6>E‑waste</h6>
+    </div>
+  </div>
+{% endblock %}

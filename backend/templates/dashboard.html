@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2 class="text-success mb-4">Complaint Dashboard</h2>
+
+  <!-- Stats cards -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card text-center shadow">
+        <div class="card-body">
+          <h5>Total Complaints</h5>
+          <p class="fs-3 text-primary">{{ total }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center shadow">
+        <div class="card-body">
+          <h5>Resolved</h5>
+          <p class="fs-3 text-success">{{ resolved }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center shadow">
+        <div class="card-body">
+          <h5>Pending</h5>
+          <p class="fs-3 text-danger">{{ pending }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Icons row -->
+  <div class="row text-center icons-row mb-4">
+    <div class="col-md-3">
+      <img src="{{ url_for('static', filename='icons/organic.png') }}" class="img-fluid mb-2" style="height:80px;">
+      <h6>Organic</h6>
+    </div>
+    <div class="col-md-3">
+      <img src="{{ url_for('static', filename='icons/plastic.png') }}" class="img-fluid mb-2" style="height:80px;">
+      <h6>Plastic</h6>
+    </div>
+    <div class="col-md-3">
+      <img src="{{ url_for('static', filename='icons/metal.png') }}" class="img-fluid mb-2" style="height:80px;">
+      <h6>Metal</h6>
+    </div>
+    <div class="col-md-3">
+      <img src="{{ url_for('static', filename='icons/ewaste.png') }}" class="img-fluid mb-2" style="height:80px;">
+      <h6>E‑waste</h6>
+    </div>
+  </div>
+
+  <!-- Complaints table -->
+  <table class="table table-striped shadow">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in complaints %}
+      <tr>
+        <td>{{ c.id }}</td>
+        <td>{{ c.description }}</td>
+        <td>{{ c.location }}</td>
+        <td>
+          {% if c.status == "Resolved" %}
+            <span class="badge bg-success">Resolved</span>
+          {% else %}
+            <span class="badge bg-danger">Pending</span>
+          {% endif %}
+        </td>
+        <td>
+          <a href="{{ url_for('resolve_complaint', complaint_id=c.id) }}" class="btn btn-sm btn-success">Resolve</a>
+          <a href="{{ url_for('delete_complaint', complaint_id=c.id) }}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Charts -->
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <canvas id="complaintChart"></canvas>
+    </div>
+    <div class="col-md-6">
+      <canvas id="binChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Complaint chart
+    const ctx1 = document.getElementById('complaintChart');
+    new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: ['Resolved', 'Pending'],
+        datasets: [{
+          label: 'Complaints',
+          data: [{{ resolved }}, {{ pending }}],
+          backgroundColor: ['#198754', '#dc3545']
+        }]
+      }
+    });
+
+    // Bin chart
+    const ctx2 = document.getElementById('binChart');
+    new Chart(ctx2, {
+      type: 'pie',
+      data: {
+        labels: ['Organic', 'Plastic', 'Metal', 'E-waste'],
+        datasets: [{
+          data: [{{ bin_levels['Organic'] }}, {{ bin_levels['Plastic'] }}, {{ bin_levels['Metal'] }}, {{ bin_levels['E-waste'] }}],
+          backgroundColor: ['#28a745', '#0dcaf0', '#ffc107', '#6f42c1']
+        }]
+      }
+    });
+  </script>
+{% endblock %}

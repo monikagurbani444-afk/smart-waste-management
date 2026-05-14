@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2 class="text-success mb-4">Prediction Result</h2>
+  <div class="card shadow p-4">
+    <p class="fs-4">Predicted Category: <strong class="text-primary">{{ prediction }}</strong></p>
+    <p>Confidence: {{ confidence }}%</p>
+    <img src="{{ url_for('static', filename='uploads/' + image) }}" class="img-fluid rounded shadow mt-3" alt="Uploaded Image">
+
+    <div class="alert alert-info mt-4">
+      <strong>Suggestion:</strong> {{ suggestion }}
+    </div>
+
+    <div class="row text-center icons-row mt-4">
+      <div class="col-md-3"><img src="{{ url_for('static', filename='icons/organic.png') }}" class="img-fluid mb-2" style="height:60px;"><h6>Organic</h6></div>
+      <div class="col-md-3"><img src="{{ url_for('static', filename='icons/plastic.png') }}" class="img-fluid mb-2" style="height:60px;"><h6>Plastic</h6></div>
+      <div class="col-md-3"><img src="{{ url_for('static', filename='icons/metal.png') }}" class="img-fluid mb-2" style="height:60px;"><h6>Metal</h6></div>
+      <div class="col-md-3"><img src="{{ url_for('static', filename='icons/ewaste.png') }}" class="img-fluid mb-2" style="height:60px;"><h6>E‑waste</h6></div>
+    </div>
+
+    <a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Try Another Image</a>
+  </div>
+
+  <!-- ✅ Recent Predictions Gallery -->
+  {% if recent_predictions %}
+    <h3 class="mt-5 text-success">Recent Predictions</h3>
+    <div class="row">
+      {% for r in recent_predictions %}
+        <div class="col-md-2 text-center">
+          <img src="{{ url_for('static', filename='uploads/' + r.image) }}" 
+               class="img-fluid rounded shadow mb-2" style="height:80px;">
+          <p class="small">{{ r.prediction }} ({{ r.confidence }}%)</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}
