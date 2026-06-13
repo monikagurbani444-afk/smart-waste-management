@@ -1,6 +1,0 @@
-dataset/
-uploads/
-__pycache__/
-*.pyc
-complaints.db
-*.csv

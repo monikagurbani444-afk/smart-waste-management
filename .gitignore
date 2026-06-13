@@ -1,0 +1,32 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# VS Code settings
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# Virtual environments
+venv/
+env/
+
+# Local database files
+*.db
+
+# Reports and logs
+*.csv
+*.log
+
+# Model checkpoints (keep only final waste_model.h5)
+*.h5
+*.ckpt
+
+# Uploads folder (keep only samples/)
+backend/static/uploads/
