@@ -30,3 +30,6 @@ env/
 
 # Uploads folder (keep only samples/)
 backend/static/uploads/
+
+# Dataset folder
+dataset/
