@@ -7,9 +7,12 @@ An AI-powered waste classification system that identifies waste as **Organic, Pl
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-MobileNetV2-orange)
 ![SQLite](https://img.shields.io/badge/SQLite-Database-lightgrey)
 
-<!-- Add a screenshot or GIF of the dashboard/prediction here — this matters a lot, drop it in before linking this repo anywhere -->
-<!-- ![Demo Screenshot](assets/demo.png) -->
+![Prediction Result](assets/predictions_result.png)
 
+
+
+
+![Complaint Dashboard](assets/dashboard.png)
 ## Overview
 
 Improper waste segregation is a major bottleneck in effective recycling and disposal. This project uses a fine-tuned **MobileNetV2** image classification model to automatically sort waste into four categories and recommend how each type should be disposed of, reducing manual sorting effort and human error.
