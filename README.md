@@ -43,7 +43,7 @@ The model achieves **~92% accuracy** overall on the test set, with strong perfor
 smart-waste-management/
 ├── backend/            # Flask app — routes, dashboard, prediction serving
 ├── model/              # Trained model artifacts
-├── split_datset.py     # Splits raw dataset into train/val/test
+├── split_dataset.py     # Splits raw dataset into train/val/test
 ├── train_model.py      # Trains the MobileNetV2 classifier
 ├── test_model.py       # Evaluates model performance on test data
 ├── requirements.txt    # Python dependencies
@@ -67,7 +67,7 @@ pip install -r requirements.txt
 ### Training the Model (optional — pretrained model included)
 
 ```bash
-python split_datset.py
+python split_dataset.py
 python train_model.py
 python test_model.py
 ```
